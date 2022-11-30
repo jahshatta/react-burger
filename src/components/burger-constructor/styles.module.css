@@ -1,0 +1,39 @@
+.constructor {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+}
+
+.drag {
+  cursor: grab;
+}
+
+.scrollable {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+}

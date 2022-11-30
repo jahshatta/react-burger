@@ -1,0 +1,15 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 24px;
+  padding: 24px 16px 40px 16px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.ingredientsList {
+  overflow-y: auto;
+}
