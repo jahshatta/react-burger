@@ -3,6 +3,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from "./ingredient/ingredient";
 import styles from "./styles.module.css";
 import PropTypes from "prop-types";
+import IngredientType from "../types/ingredient-type";
 
 const typesTitleMap = {
   bun: "Булки",
@@ -33,7 +34,7 @@ function BurgerIngredients({ data }) {
   return (
     <section className={`${styles.section} mr-5`}>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
-      <div style={{ display: "flex" }} className="mb-10">
+      <div className={`${styles.tabsContainer} mb-10`}>
         <Tab value="bun" active={current === "bun"} onClick={onTabClick}>
           Булки
         </Tab>
@@ -63,21 +64,6 @@ function BurgerIngredients({ data }) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      proteins: PropTypes.number.isRequired,
-      fat: PropTypes.number.isRequired,
-      carbohydrates: PropTypes.number.isRequired,
-      calories: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
-      image: PropTypes.string.isRequired,
-      image_mobile: PropTypes.string.isRequired,
-      image_large: PropTypes.string.isRequired,
-      __v: PropTypes.number.isRequired,
-    })
-  ).isRequired,
+  data: PropTypes.arrayOf(IngredientType).isRequired,
 };
 export default BurgerIngredients;

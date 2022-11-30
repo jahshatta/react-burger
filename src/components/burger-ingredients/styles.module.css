@@ -13,3 +13,7 @@
 .ingredientsList {
   overflow-y: auto;
 }
+
+.tabsContainer {
+  display: flex;
+}

@@ -1,7 +1,6 @@
 import MenuItem from "./menu-item/menu-item";
-import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
-
 import {
+  Logo,
   BurgerIcon,
   ListIcon,
   ProfileIcon,
