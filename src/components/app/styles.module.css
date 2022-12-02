@@ -1,0 +1,12 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main {
+  min-height: 0;
+  display: flex;
+  max-width: 1240px;
+  margin: 0 auto;
+}

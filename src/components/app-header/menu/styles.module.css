@@ -1,0 +1,28 @@
+.nav {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper {
+  flex: 1;
+  text-align: center;
+}
+
+.profileMenu {
+  justify-content: flex-end;
+}
