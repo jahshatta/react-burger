@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCurrentIngredient } from "../../../services/store/indgredients/IngredientsSlice";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../../modal/modal";
 import IngredientInfo from "../ingredient-info/ingredient-info";
@@ -7,13 +9,14 @@ import IngredientType from "../../types/ingredient-type";
 
 function Ingredient({ data }) {
   const [modalIsVisible, setModalIsVisible] = useState(false);
-
+  const dispatch = useDispatch();
   return (
     <>
       <div
         className={styles.card}
         onClick={() => {
           setModalIsVisible(true);
+          dispatch(setCurrentIngredient(data._id));
         }}
       >
         <img src={data.image} alt={data.name} className="pl-4 pr-4" />
@@ -32,7 +35,7 @@ function Ingredient({ data }) {
             setModalIsVisible(false);
           }}
         >
-          <IngredientInfo data={data} />
+          <IngredientInfo />
         </Modal>
       )}
     </>
