@@ -2,18 +2,16 @@ import { useMemo, useState } from "react";
 import { useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  ConstructorElement,
   Button,
   CurrencyIcon,
-  DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import {
   addBun,
   addIngredient,
-  removeIngredient,
   selectSelectedIngredients,
   selectAllBuns,
 } from "../../services/store/indgredients/IngredientsSlice";
+import ConstructorItem from "./constructor-item";
 import Modal from "../modal/modal";
 import OrderDetails from "./order-details/order-details";
 import EmptyBun from "./empty-bun";
@@ -31,11 +29,8 @@ function BurgerConstructor() {
       0
     );
   }, [ingredients, buns]);
-  const [{ isHover }, dropRef] = useDrop({
+  const [, dropRef] = useDrop({
     accept: "ingredient",
-    collect: (monitor) => ({
-      isHover: monitor.isOver(),
-    }),
     drop(item) {
       if (item.type !== "bun") {
         dispatch(addIngredient(item));
@@ -51,13 +46,7 @@ function BurgerConstructor() {
           <>
             <div className="pl-8">
               {topBun ? (
-                <ConstructorElement
-                  text={`${topBun.name}`}
-                  type="top"
-                  isLocked
-                  price={topBun.price}
-                  thumbnail={topBun.image}
-                />
+                <ConstructorItem data={topBun} type="top" />
               ) : (
                 <EmptyBun type="top" />
               )}
@@ -70,38 +59,16 @@ function BurgerConstructor() {
                   </p>
                 </div>
               ) : (
-                ingredients
-                  .filter((item) => item.type !== "bun")
-                  .map((item) => {
-                    return (
-                      <div className={styles.listItem} key={item.uuid}>
-                        <div className={`${styles.drag} mr-2`}>
-                          <DragIcon />
-                        </div>
-                        <ConstructorElement
-                          key={item.uuid}
-                          text={item.name}
-                          isLocked={item.type === "bun"}
-                          price={item.price}
-                          thumbnail={item.image}
-                          handleClose={(e) => {
-                            dispatch(removeIngredient(item));
-                          }}
-                        />
-                      </div>
-                    );
-                  })
+                ingredients.map((item, idx) => {
+                  return (
+                    <ConstructorItem data={item} key={item.uuid} index={idx} />
+                  );
+                })
               )}
             </div>
             <div className="pl-8">
               {bottomBun ? (
-                <ConstructorElement
-                  text={`${bottomBun.name} (низ)`}
-                  type="bottom"
-                  isLocked
-                  price={bottomBun.price}
-                  thumbnail={bottomBun.image}
-                />
+                <ConstructorItem data={bottomBun} type="bottom" />
               ) : (
                 <EmptyBun type="bottom" />
               )}

@@ -93,6 +93,10 @@ export const ingredientsSlice = createSlice({
     setOrder: (state, action) => {
       state.order = action.payload;
     },
+    reorderIngredients: (state, action) => {
+      const item = state.selectedIngredients.splice(action.payload.from, 1)[0];
+      state.selectedIngredients.splice(action.payload.to, 0, item);
+    },
   },
   extraReducers(builder) {
     builder
@@ -118,6 +122,7 @@ export const {
   removeIngredient,
   setCurrentIngredient,
   setOrder,
+  reorderIngredients,
 } = ingredientsSlice.actions;
 
 export const selectAllIngredients = (state) => state.ingredients.ingredients;
