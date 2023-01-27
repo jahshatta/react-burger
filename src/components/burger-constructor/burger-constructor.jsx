@@ -11,6 +11,7 @@ import {
   selectSelectedIngredients,
   selectAllBuns,
 } from "../../services/store/indgredients/IngredientsSlice";
+import { createOrder } from "../../services/store/orders/OrdersSlice";
 import ConstructorItem from "./constructor-item";
 import Modal from "../modal/modal";
 import OrderDetails from "./order-details/order-details";
@@ -88,6 +89,7 @@ function BurgerConstructor() {
             type="primary"
             size="large"
             onClick={() => {
+              dispatch(createOrder([...buns, ...ingredients]));
               setModalIsVisible(true);
             }}
           >
