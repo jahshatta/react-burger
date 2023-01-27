@@ -4,6 +4,8 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import styles from "./styles.module.css";
 import { useSelector, useDispatch } from "react-redux";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
 import {
   selectAllIngredients,
   selectSelectedIngredients,
@@ -29,10 +31,10 @@ function App() {
         {ingredientsStatus === "loading" ? (
           <span>Загружаем ингредиенты...</span>
         ) : (
-          <>
+          <DndProvider backend={HTML5Backend}>
             <BurgerIngredients data={ingredients} />
             <BurgerConstructor data={selectedIngredients} />
-          </>
+          </DndProvider>
         )}
       </main>
     </div>

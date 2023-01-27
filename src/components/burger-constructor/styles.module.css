@@ -38,3 +38,29 @@
   display: flex;
   align-items: center;
 }
+
+.emptyBun {
+  border: 1px dashed #8585ad;
+  max-width: 536px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.topBun {
+  border-radius: var(--top-constructor-item-border-radius);
+}
+
+.bottomBun {
+  border-radius: var(--bottom-constructor-item-border-radius);
+}
+
+.emptyList {
+  border: 1px dashed #8585ad;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  max-width: 536px;
+  box-sizing: border-box;
+}
