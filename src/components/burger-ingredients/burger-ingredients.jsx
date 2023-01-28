@@ -1,4 +1,5 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from "./ingredient/ingredient";
 import styles from "./styles.module.css";
@@ -14,22 +15,46 @@ const typesTitleMap = {
 function BurgerIngredients({ data }) {
   const [current, setCurrent] = useState("bun");
 
-  const refsMap = {
+  const [bunsRef, bunsView] = useInView();
+  const [sausesRef, sausesView] = useInView();
+  const [mainRef, mainView] = useInView();
+  const ovserverRefsMap = {
+    bun: bunsRef,
+    sauce: sausesRef,
+    main: mainRef,
+  };
+  const titleRefsMap = {
     bun: useRef(null),
     sauce: useRef(null),
     main: useRef(null),
   };
+  useEffect(() => {
+    if (bunsView) {
+      setCurrent("bun");
+    } else if (sausesView) {
+      setCurrent("sauce");
+    } else if (mainView) {
+      setCurrent("main");
+    }
+  }, [bunsView, sausesView, mainView]);
+
   const groupedIngredients = useMemo(() => {
-    return data.reduce((group, ingredient) => {
+    const grouped = {
+      bun: [],
+      sauce: [],
+      main: [],
+    };
+    data.forEach((ingredient) => {
       const { type } = ingredient;
-      group[type] = group[type] ?? [];
-      group[type].push(ingredient);
-      return group;
-    }, {});
+      grouped[type] = grouped[type] ?? [];
+      grouped[type].push(ingredient);
+    });
+    return grouped;
   }, [data]);
+
   const onTabClick = (key) => {
     setCurrent(key);
-    refsMap[key].current.scrollIntoView({ behavior: "smooth" });
+    titleRefsMap[key].current.scrollIntoView({ behavior: "smooth" });
   };
   return (
     <section className={`${styles.section}`}>
@@ -48,8 +73,10 @@ function BurgerIngredients({ data }) {
       <section className={`${styles.ingredientsList} custom-scroll`}>
         {Object.entries(groupedIngredients).map(([key, items]) => {
           return (
-            <section ref={refsMap[key]} key={key}>
-              <p className="text text_type_main-medium">{typesTitleMap[key]}</p>
+            <section ref={ovserverRefsMap[key]} key={key}>
+              <p ref={titleRefsMap[key]} className="text text_type_main-medium">
+                {typesTitleMap[key]}
+              </p>
               <div className={styles.grid}>
                 {items.map((item) => (
                   <Ingredient data={item} key={item._id} />
