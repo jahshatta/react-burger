@@ -10,6 +10,7 @@ import {
   addIngredient,
   selectSelectedIngredients,
   selectAllBuns,
+  resetConstructor,
 } from "../../services/store/indgredients/IngredientsSlice";
 import { createOrder } from "../../services/store/orders/OrdersSlice";
 import ConstructorItem from "./constructor-item";
@@ -91,6 +92,7 @@ function BurgerConstructor() {
             onClick={() => {
               dispatch(createOrder([...buns, ...ingredients]));
               setModalIsVisible(true);
+              dispatch(resetConstructor());
             }}
           >
             Оформить заказ

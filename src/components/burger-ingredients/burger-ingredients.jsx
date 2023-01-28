@@ -1,10 +1,10 @@
 import { useState, useMemo, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from "./ingredient/ingredient";
 import styles from "./styles.module.css";
-import PropTypes from "prop-types";
-import IngredientType from "../types/ingredient-type";
+import { selectAllIngredients } from "../../services/store/indgredients/IngredientsSlice";
 
 const typesTitleMap = {
   bun: "Булки",
@@ -12,9 +12,9 @@ const typesTitleMap = {
   main: "Начинки",
 };
 
-function BurgerIngredients({ data }) {
+function BurgerIngredients() {
   const [current, setCurrent] = useState("bun");
-
+  const ingredients = useSelector(selectAllIngredients);
   const [bunsRef, bunsView] = useInView();
   const [sausesRef, sausesView] = useInView();
   const [mainRef, mainView] = useInView();
@@ -44,13 +44,13 @@ function BurgerIngredients({ data }) {
       sauce: [],
       main: [],
     };
-    data.forEach((ingredient) => {
+    ingredients.forEach((ingredient) => {
       const { type } = ingredient;
       grouped[type] = grouped[type] ?? [];
       grouped[type].push(ingredient);
     });
     return grouped;
-  }, [data]);
+  }, [ingredients]);
 
   const onTabClick = (key) => {
     setCurrent(key);
@@ -90,7 +90,4 @@ function BurgerIngredients({ data }) {
   );
 }
 
-BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(IngredientType).isRequired,
-};
 export default BurgerIngredients;

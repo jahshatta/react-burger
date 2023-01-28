@@ -7,14 +7,7 @@ const initialState = {
   status: "idle",
   error: null,
   selectedBuns: [],
-  selectedIngredients: [
-    // "60d3b41abdacab0026a733c6",
-    // "60d3b41abdacab0026a733c8",
-    // "60d3b41abdacab0026a733c9",
-    // "60d3b41abdacab0026a733cf",
-    // "60d3b41abdacab0026a733d3",
-    // "60d3b41abdacab0026a733cc",
-  ],
+  selectedIngredients: [],
   countMap: {},
   currentIngredientId: null,
 };
@@ -22,7 +15,6 @@ const initialState = {
 export const fetchIngredients = createAsyncThunk(
   "ingredients/fetchIngredients",
   async () => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
     const response = await api.get("/ingredients");
     return response.data.data;
   }
@@ -46,6 +38,10 @@ export const ingredientsSlice = createSlice({
       } else {
         state.countMap[_id] += 1;
       }
+    },
+    resetConstructor: (state) => {
+      state.selectedBuns = [];
+      state.selectedIngredients = [];
     },
     addBun: (state, action) => {
       const bun = action.payload;
@@ -120,6 +116,7 @@ export const {
   setIngredients,
   addIngredient,
   removeIngredient,
+  resetConstructor,
   setCurrentIngredient,
   setOrder,
   reorderIngredients,

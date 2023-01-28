@@ -14,8 +14,6 @@ import {
 
 function App() {
   const dispatch = useDispatch();
-  const ingredients = useSelector(selectAllIngredients);
-  const selectedIngredients = useSelector(selectSelectedIngredients);
   const ingredientsStatus = useSelector((state) => state.ingredients.status);
 
   useEffect(() => {
@@ -32,8 +30,8 @@ function App() {
           <span>Загружаем ингредиенты...</span>
         ) : (
           <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients data={ingredients} />
-            <BurgerConstructor data={selectedIngredients} />
+            <BurgerIngredients />
+            <BurgerConstructor />
           </DndProvider>
         )}
       </main>

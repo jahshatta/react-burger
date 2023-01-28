@@ -11,10 +11,13 @@ export const createOrder = createAsyncThunk(
   "orders/createOrder",
   async (ingredients) => {
     const ids = ingredients.map((item) => item._id);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
     const response = await api.post("/orders", {
       ingredients: ids,
     });
+    const { data } = response;
+    if (data.success) {
+    }
+    console.log("response", response);
     return response.data;
   }
 );
