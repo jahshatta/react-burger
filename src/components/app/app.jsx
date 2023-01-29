@@ -1,61 +1,38 @@
-import { useState, useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import styles from "./styles.module.css";
-import { INGREDIENTSAPIURL } from "../../constants";
-
-const selectedIngregientsIds = [
-  "60d3b41abdacab0026a733c6",
-  "60d3b41abdacab0026a733c8",
-  "60d3b41abdacab0026a733c9",
-  "60d3b41abdacab0026a733cf",
-  "60d3b41abdacab0026a733d3",
-  "60d3b41abdacab0026a733cc",
-];
+import { useSelector, useDispatch } from "react-redux";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
+import {
+  selectAllIngredients,
+  selectSelectedIngredients,
+  fetchIngredients,
+} from "../../services/store/indgredients/IngredientsSlice";
 
 function App() {
-  const [ingredients, setIngredients] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const ingredientsStatus = useSelector((state) => state.ingredients.status);
 
   useEffect(() => {
-    const getIngredients = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(INGREDIENTSAPIURL);
+    if (ingredientsStatus === "idle") {
+      dispatch(fetchIngredients());
+    }
+  }, [ingredientsStatus, dispatch]);
 
-        if (!response.ok)
-          throw new Error(
-            `An error occurred while fetching ingredients: ${response.statusText}`
-          );
-
-        const ingredients = await response.json();
-        setIngredients(ingredients.data);
-        setLoading(false);
-      } catch (err) {
-        setLoading(false);
-        console.log(err);
-      }
-    };
-
-    getIngredients();
-  }, []);
-  const selectedIngredients = useMemo(() => {
-    return ingredients.filter((item) =>
-      selectedIngregientsIds.includes(item._id)
-    );
-  }, [ingredients]);
   return (
     <div className={styles.app}>
       <AppHeader />
       <main className={`${styles.main} p-5`}>
-        {loading ? (
+        {ingredientsStatus === "loading" ? (
           <span>Загружаем ингредиенты...</span>
         ) : (
-          <>
-            <BurgerIngredients data={ingredients} />
-            <BurgerConstructor data={selectedIngredients} />
-          </>
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
         )}
       </main>
     </div>

@@ -1,3 +1,6 @@
+.cardWrapper {
+  position: relative;
+}
 .card {
   cursor: pointer;
 }

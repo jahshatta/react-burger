@@ -8,12 +8,12 @@ import PropTypes from "prop-types";
 const modalRoot = document.getElementById("modal");
 
 function Modal({ title, children, onClose }) {
-  const handleKeyDown = (e) => {
-    if (e.key === "Escape") {
-      onClose();
-    }
-  };
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
     document.addEventListener("keydown", handleKeyDown, false);
 
     return () => {
