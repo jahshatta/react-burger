@@ -6,9 +6,10 @@
 }
 
 .section {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  display: grid;
+  max-height: calc(100vh - 88px);
+  grid-template-rows: min-content min-content minmax(0, 1fr);
+  grid-area: list;
 }
 .ingredientsList {
   overflow-y: auto;
