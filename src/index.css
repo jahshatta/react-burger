@@ -5,6 +5,12 @@
   src: url("./fonts/JetBrainsMono-Regular.woff2") format("woff2");
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .html,
 .body {
   height: 100%;

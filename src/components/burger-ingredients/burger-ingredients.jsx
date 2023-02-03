@@ -57,7 +57,7 @@ function BurgerIngredients() {
     titleRefsMap[key].current.scrollIntoView({ behavior: "smooth" });
   };
   return (
-    <section className={`${styles.section}`}>
+    <section className={`${styles.section} pb-5`}>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
       <div className={`${styles.tabsContainer} mb-10`}>
         <Tab value="bun" active={current === "bun"} onClick={onTabClick}>

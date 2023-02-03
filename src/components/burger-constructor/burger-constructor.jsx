@@ -43,7 +43,7 @@ function BurgerConstructor() {
   });
   return (
     <>
-      <section className={`${styles.constructor} mt-25`}>
+      <section className={`${styles.constructor} pt-25 pb-5`}>
         <section className={`${styles.list}`} ref={dropRef}>
           <>
             <div className="pl-8">

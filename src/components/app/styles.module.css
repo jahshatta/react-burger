@@ -1,13 +1,14 @@
 .app {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "header" "main";
   height: 100vh;
 }
 
 .main {
-  min-height: 0;
-  display: flex;
+  grid-area: main;
+  width: 100%;
   max-width: 1240px;
   margin: 0 auto;
-  gap: 40px;
 }
