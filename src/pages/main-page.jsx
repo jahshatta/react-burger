@@ -23,7 +23,7 @@ function MainPage() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className={`${styles.container} pl-5 pr-5`}>
+      <div className={`${styles.container}`}>
         <BurgerIngredients />
         <BurgerConstructor />
       </div>
