@@ -1,0 +1,11 @@
+.link {
+  display: block;
+  line-height: 64px;
+  text-decoration: none;
+}
+.active {
+  color: var(--theme-ui-colors-text, #f5f6f7);
+}
+.form {
+  text-align: center;
+}
