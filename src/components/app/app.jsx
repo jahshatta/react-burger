@@ -15,17 +15,24 @@ import OrderPage from "../../pages/order-page";
 import IngredientPage from "../../pages/ingredient-page";
 import styles from "./styles.module.css";
 import NotFoundPage from "../../pages/not-found-page";
-import { useDispatch } from "react-redux";
-import { getUser } from "../../services/store/user/UserSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getUser,
+  selectgetUserStatus,
+} from "../../services/store/user/UserSlice";
 
 function App() {
   const dispatch = useDispatch();
+  const status = useSelector(selectgetUserStatus);
   useEffect(() => {
-    if(localStorage.getItem('accessToken')) {
+    if (localStorage.getItem("accessToken")) {
       dispatch(getUser());
     }
-  }, [])
+  }, []);
 
+  if (status === "loading" || status === "idle") {
+    return <div className={styles.loadingWrapper}>Загружаем бургерную</div>;
+  }
   return (
     <div className={styles.app}>
       <AppHeader />

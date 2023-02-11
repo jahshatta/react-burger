@@ -4,7 +4,7 @@ import styles from "./profile.module.css";
 
 function ProfilePage() {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} mt-30`}>
       <ProfileMenu />
       <Outlet />
     </div>
