@@ -32,9 +32,9 @@ function Ingredient({ data }) {
           dispatch(setCurrentIngredient(data._id));
           navigate(`/ingredients/${data._id}`, {
             state: {
-              showModal: true
-            }
-          })
+              showModal: true,
+            },
+          });
         }}
       >
         <img src={data.image} alt={data.name} className="pl-4 pr-4" />

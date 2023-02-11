@@ -5,11 +5,8 @@ const BASE_URL = "https://norma.nomoreparties.space/api";
 
 const api = axios.create({
   baseURL: BASE_URL,
-  // withCredentials: true,
   headers: { "Content-Type": "application/json" },
 });
-
-// api.interceptors.request.use((config) => {});
 
 api.interceptors.request.use(function (config) {
   config.headers.authorization = `Bearer ${localStorage.getItem(

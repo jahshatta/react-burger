@@ -36,13 +36,7 @@ function ProfileForm() {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    // const params = {
-    //   name: e.target.name.value,
-    //   email: e.target.login.value,
-    // };
-    // if (e.target.password.value) {
-    //   params.password = e.target.password.value;
-    // }
+
     dispatch(updateUser(values));
   };
   const onFieldChange = (e) => {

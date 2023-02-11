@@ -4,11 +4,11 @@ import styles from "./styles.module.css";
 
 function IngredientInfo() {
   const ingredient = useSelector(selectCurrentIngredient);
-  if(!ingredient) {
-    return null
+  if (!ingredient) {
+    return null;
   }
   return (
-    <>
+    <div className={styles.container}>
       <img
         alt={ingredient.name}
         src={ingredient.image_large}
@@ -49,7 +49,7 @@ function IngredientInfo() {
           </span>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import AppHeader from "../app-header/app-header";
 import ProtectedRouteElement from "../protected-route";
+import AuthProtectedRoute from "../auth-protected-route";
 import MainPage from "../../pages/main-page";
 import LoginPage from "../../pages/login-page";
 import LogoutPage from "../../pages/logout-page";
@@ -30,7 +31,10 @@ function App() {
     }
   }, []);
 
-  if (status === "loading" || status === "idle") {
+  if (
+    (status === "loading" || status === "idle") &&
+    localStorage.getItem("accessToken")
+  ) {
     return <div className={styles.loadingWrapper}>Загружаем бургерную</div>;
   }
   return (
@@ -39,11 +43,11 @@ function App() {
       <main className={`${styles.main} pl-5 pr-5`}>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<AuthProtectedRoute element={<LoginPage />}/>} />
           <Route path="/logout" element={<LogoutPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/register" element={<AuthProtectedRoute element={<RegisterPage />}/>} />
+          <Route path="/forgot-password" element={<AuthProtectedRoute element={<ForgotPasswordPage />}/>} />
+          <Route path="/reset-password" element={<AuthProtectedRoute element={<ResetPasswordPage />}/>} />
           <Route
             path="/profile"
             element={<ProtectedRouteElement element={<ProfilePage />} />}
