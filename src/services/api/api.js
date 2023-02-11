@@ -12,7 +12,9 @@ const api = axios.create({
 // api.interceptors.request.use((config) => {});
 
 api.interceptors.request.use(function (config) {
-  config.headers.authorization = `Bearer ${localStorage.getItem('accessToken')}`
+  config.headers.authorization = `Bearer ${localStorage.getItem(
+    "accessToken"
+  )}`;
   return config;
 });
 
@@ -20,22 +22,20 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const { status } = error.response;
-
     if (status === 403) {
       try {
-        // Try to refresh the JWT using a refresh token
         const response = await axios.post(`${BASE_URL}/auth/token`, {
-          token: localStorage.getItem('refreshToken')
+          token: localStorage.getItem("refreshToken"),
         });
         const { success, accessToken, refreshToken } = response.data;
 
-        if(success) {
-          localStorage.setItem('accessToken', accessToken);
-          setCookie('refreshToken', refreshToken)
+        if (success) {
+          localStorage.setItem("accessToken", accessToken);
+          setCookie("refreshToken", refreshToken);
         }
         return api(error.config);
       } catch (refreshError) {
-        console.error('Failed to refresh JWT:', refreshError);
+        console.error("Failed to refresh JWT:", refreshError);
         return Promise.reject(refreshError);
       }
     }

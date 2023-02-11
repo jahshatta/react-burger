@@ -5,6 +5,10 @@ import { setCookie, getCookie, deleteCookie } from "../../utils";
 const initialState = {
   user: null,
   token: null,
+  updateUser: {
+    status: "idle",
+    error: null,
+  },
   register: {
     status: "idle",
     error: null,
@@ -26,8 +30,8 @@ const initialState = {
     error: null,
   },
   getUser: {
-    status: 'idle',
-    error: null
+    status: "idle",
+    error: null,
   },
   status: "idle",
   error: null,
@@ -40,6 +44,19 @@ export const getUser = createAsyncThunk(
       const response = await api.get("auth/user");
       return response.data;
     } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  "user/update",
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await api.patch("auth/user", { ...params });
+      return response.data;
+    } catch (error) {
+      console.log("error", error);
       return rejectWithValue(error.response.data);
     }
   }
@@ -111,7 +128,6 @@ export const confirmResetPassword = createAsyncThunk(
   }
 );
 
-console.log("slice");
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -128,7 +144,7 @@ export const userSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.register.status = "succeeded";
         state.user = action.payload.user;
-        localStorage.setItem('accessToken', action.payload.accessToken);
+        localStorage.setItem("accessToken", action.payload.accessToken);
         setCookie("refreshToken", action.payload.refreshToken);
       })
       .addCase(register.rejected, (state, action) => {
@@ -138,14 +154,13 @@ export const userSlice = createSlice({
           "Что-то пошло не так. Повторите попытку позже.";
       })
       .addCase(login.pending, (state, action) => {
-        console.log("loading");
         state.login.status = "loading";
       })
       .addCase(login.fulfilled, (state, action) => {
         state.login.status = "succeeded";
         state.user = action.payload.user;
-        const accessToken = action.payload.accessToken.split('Bearer ')[1];
-        localStorage.setItem('accessToken', accessToken);
+        const accessToken = action.payload.accessToken.split("Bearer ")[1];
+        localStorage.setItem("accessToken", accessToken);
         setCookie("refreshToken", action.payload.refreshToken);
       })
       .addCase(login.rejected, (state, action) => {
@@ -161,7 +176,7 @@ export const userSlice = createSlice({
         state.logout.status = "succeeded";
         state.user = null;
         deleteCookie("refreshToken");
-        localStorage.removeItem('accessToken');
+        localStorage.removeItem("accessToken");
       })
       .addCase(logout.rejected, (state, action) => {
         state.logout.status = "failed";
@@ -197,12 +212,25 @@ export const userSlice = createSlice({
         state.getUser.status = "loading";
       })
       .addCase(getUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.user;
         state.getUser.status = "succeeded";
       })
       .addCase(getUser.rejected, (state, action) => {
         state.getUser.status = "failed";
         state.getUser.error =
+          action.payload?.message ||
+          "Что-то пошло не так. Повторите попытку позже.";
+      })
+      .addCase(updateUser.pending, (state, action) => {
+        state.updateUser.status = "loading";
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.updateUser.status = "succeeded";
+        state.user = action.payload.user;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.updateUser.status = "failed";
+        state.updateUser.error =
           action.payload?.message ||
           "Что-то пошло не так. Повторите попытку позже.";
       });
@@ -217,9 +245,16 @@ export const selectLoginStatus = (state) => state.user.login.status;
 export const selectLoginError = (state) => state.user.login.error;
 export const selectLogoutStatus = (state) => state.user.logout.status;
 export const selectLogoutError = (state) => state.user.logout.error;
-export const selectResetPasswordStatus = (state) => state.user.resetPassword.status;
-export const selectResetPasswordError = (state) => state.user.resetPassword.error;
-export const selectConfirmResetPasswordStatus = (state) => state.user.confirmResetPassword.status;
-export const selectConfirmResetPasswordError = (state) => state.user.confirmResetPassword.error;
+export const selectResetPasswordStatus = (state) =>
+  state.user.resetPassword.status;
+export const selectResetPasswordError = (state) =>
+  state.user.resetPassword.error;
+export const selectConfirmResetPasswordStatus = (state) =>
+  state.user.confirmResetPassword.status;
+export const selectConfirmResetPasswordError = (state) =>
+  state.user.confirmResetPassword.error;
+export const selectgetUserStatus = (state) => state.user.getUser.status;
+export const selectUpdateUserStatus = (state) => state.user.updateUser.status;
+export const selectUpdateUserError = (state) => state.user.updateUser.error;
 
 export default userSlice.reducer;
