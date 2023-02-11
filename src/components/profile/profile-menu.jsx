@@ -5,7 +5,6 @@ const baseClassName = "text text_type_main-medium";
 
 function ProfileMenu() {
   const linkClassName = ({ isActive }) => {
-    console.log("isActive", isActive);
     return `${styles.link} ${baseClassName} ${
       isActive ? styles.active : "text_color_inactive"
     }`;

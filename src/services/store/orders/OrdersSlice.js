@@ -17,7 +17,6 @@ export const createOrder = createAsyncThunk(
     const { data } = response;
     if (data.success) {
     }
-    console.log("response", response);
     return response.data;
   }
 );

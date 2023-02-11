@@ -8,3 +8,8 @@
   text-decoration: none;
   margin-left: 8px;
 }
+.error {
+  display: flex;
+  align-items: center;
+  color: rgb(229, 43, 26);
+}

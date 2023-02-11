@@ -42,12 +42,10 @@ export const ingredientsSlice = createSlice({
     resetConstructor: (state) => {
       state.selectedBuns = [];
       state.selectedIngredients = [];
+      state.countMap = {}
     },
     addBun: (state, action) => {
       const bun = action.payload;
-      // Я хотел сделать сделать мапу для подсчёта кол-ва, чтобы не проходить для каждого доступного индгредиента
-      // по списку добавленных. Но т.к. в мапе хранятся только айдишники, то для определения булки всё таки
-      // пришлось немного извернуться.
       const currentBunId = state.selectedBuns[0]?._id ?? null;
       if (bun._id === currentBunId) {
         return;

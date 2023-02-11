@@ -1,4 +1,5 @@
 import MenuItem from "./menu-item/menu-item";
+import { Link } from "react-router-dom";
 import {
   Logo,
   BurgerIcon,
@@ -11,16 +12,16 @@ function Menu() {
   return (
     <nav className={styles.nav}>
       <ul className={styles.list}>
-        <MenuItem Icon={BurgerIcon} text="Конструктор" isActive />
-        <MenuItem Icon={ListIcon} text="Лента заказов" />
+        <MenuItem Icon={BurgerIcon} text="Конструктор" path="/" />
+        <MenuItem Icon={ListIcon} path="/profile/orders" text="Лента заказов" />
       </ul>
       <div className={styles.wrapper}>
-        <a href="/">
+        <Link to="/">
           <Logo />
-        </a>
+        </Link>
       </div>
       <ul className={`${styles.list} ${styles.profileMenu}`}>
-        <MenuItem Icon={ProfileIcon} text="Личный кабинет" />
+        <MenuItem Icon={ProfileIcon} path="/profile" text="Личный кабинет" />
       </ul>
     </nav>
   );
