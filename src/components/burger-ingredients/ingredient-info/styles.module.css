@@ -1,3 +1,7 @@
+.container {
+  text-align: center;
+}
+
 .nutrition {
   display: flex;
   align-items: center;
