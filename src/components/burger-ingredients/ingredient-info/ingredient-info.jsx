@@ -4,6 +4,9 @@ import styles from "./styles.module.css";
 
 function IngredientInfo() {
   const ingredient = useSelector(selectCurrentIngredient);
+  if(!ingredient) {
+    return null
+  }
   return (
     <>
       <img

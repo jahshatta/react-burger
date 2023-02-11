@@ -12,6 +12,7 @@ import {
   selectAllBuns,
   resetConstructor,
 } from "../../services/store/indgredients/IngredientsSlice";
+import { selectCurrentUser } from "../../services/store/user/UserSlice";
 import { createOrder } from "../../services/store/orders/OrdersSlice";
 import ConstructorItem from "./constructor-item";
 import Modal from "../modal/modal";
@@ -23,6 +24,7 @@ function BurgerConstructor() {
   const dispatch = useDispatch();
   const buns = useSelector(selectAllBuns);
   const ingredients = useSelector(selectSelectedIngredients);
+  const currentUser = useSelector(selectCurrentUser);
   const [topBun, bottomBun] = buns;
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const totalPrice = useMemo(() => {
@@ -86,9 +88,10 @@ function BurgerConstructor() {
           </div>
           <Button
             htmlType="button"
-            disabled={!(buns.length && ingredients.length)}
+            disabled={!(buns.length && ingredients.length) || !currentUser}
             type="primary"
             size="large"
+            title={currentUser ? null : "Авторизуйтесь чтобы оформить заказ"}
             onClick={() => {
               dispatch(createOrder([...buns, ...ingredients]));
               setModalIsVisible(true);

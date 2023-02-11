@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
 import {
@@ -15,6 +16,7 @@ import styles from "./styles.module.css";
 import IngredientType from "../../types/ingredient-type";
 
 function Ingredient({ data }) {
+  const navigate = useNavigate();
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const dispatch = useDispatch();
   const count = useSelector((state) => selectIngredientCount(state, data._id));
@@ -31,8 +33,13 @@ function Ingredient({ data }) {
         ref={dragRef}
         className={styles.card}
         onClick={() => {
-          setModalIsVisible(true);
+          // setModalIsVisible(true);
           dispatch(setCurrentIngredient(data._id));
+          navigate(`/ingredients/${data._id}`, {
+            state: {
+              showModal: true
+            }
+          })
         }}
       >
         <img src={data.image} alt={data.name} className="pl-4 pr-4" />
@@ -44,7 +51,7 @@ function Ingredient({ data }) {
         </div>
         <p className="text text_type_main-default mt-4 mb-4">{data.name}</p>
       </div>
-      {modalIsVisible && (
+      {/* {modalIsVisible && (
         <Modal
           title="Детали ингредиента"
           onClose={() => {
@@ -53,7 +60,7 @@ function Ingredient({ data }) {
         >
           <IngredientInfo />
         </Modal>
-      )}
+      )} */}
     </div>
   );
 }

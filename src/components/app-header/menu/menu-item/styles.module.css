@@ -8,3 +8,6 @@
   text-decoration: none;
   color: inherit;
 }
+.active {
+  color: var(--theme-ui-colors-text, #f5f6f7);
+}
