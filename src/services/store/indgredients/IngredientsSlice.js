@@ -31,7 +31,6 @@ export const ingredientsSlice = createSlice({
       const ingredient = { ...action.payload, uuid: uuid4() };
       state.selectedIngredients.push(ingredient);
 
-      //update map with count of selected ingredients
       const { _id } = ingredient;
       if (!state.countMap[_id]) {
         state.countMap[_id] = 1;
@@ -42,7 +41,7 @@ export const ingredientsSlice = createSlice({
     resetConstructor: (state) => {
       state.selectedBuns = [];
       state.selectedIngredients = [];
-      state.countMap = {}
+      state.countMap = {};
     },
     addBun: (state, action) => {
       const bun = action.payload;
@@ -108,7 +107,6 @@ export const ingredientsSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const {
   addBun,
   setIngredients,
