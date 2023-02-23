@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
-import BurgerIngredients from "../components/burger-ingredients/burger-ingredients";
-import BurgerConstructor from "../components/burger-constructor/burger-constructor";
-import { fetchIngredients } from "../services/store/indgredients/IngredientsSlice";
+import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
+import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
+import { fetchIngredients } from "../../services/store/indgredients/IngredientsSlice";
 import styles from "./main.module.css";
 
 function MainPage() {

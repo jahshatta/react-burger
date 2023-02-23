@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, selectLogoutStatus } from "../services/store/user/UserSlice";
+import { logout, selectLogoutStatus } from "../../services/store/user/UserSlice";
 
 function LogoutPage() {
   const navigate = useNavigate();

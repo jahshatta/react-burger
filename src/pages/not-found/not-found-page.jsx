@@ -1,4 +1,4 @@
-import img from "../images/404.png";
+import img from "../../images/404.png";
 import styles from "./notfound.module.css";
 
 function NotFoundPage() {

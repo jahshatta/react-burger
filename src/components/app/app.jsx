@@ -3,19 +3,19 @@ import { Routes, Route } from "react-router-dom";
 import AppHeader from "../app-header/app-header";
 import ProtectedRouteElement from "../protected-route";
 import AuthProtectedRoute from "../auth-protected-route";
-import MainPage from "../../pages/main-page";
-import LoginPage from "../../pages/login-page";
-import LogoutPage from "../../pages/logout-page";
-import RegisterPage from "../../pages/register-page";
-import ForgotPasswordPage from "../../pages/forgot-password-page";
-import ResetPasswordPage from "../../pages/reset-password-page";
-import ProfilePage from "../../pages/profile-page";
-import ProfileFormPage from "../../pages/profile-form-page";
-import OrdersPage from "../../pages/orders-page";
-import OrderPage from "../../pages/order-page";
-import IngredientPage from "../../pages/ingredient-page";
+import MainPage from "../../pages/main/main-page";
+import LoginPage from "../../pages/login/login-page";
+import LogoutPage from "../../pages/logout/logout-page";
+import RegisterPage from "../../pages/register/register-page";
+import ForgotPasswordPage from "../../pages/forgot-password/forgot-password-page";
+import ResetPasswordPage from "../../pages/reset-password/reset-password-page";
+import ProfilePage from "../../pages/profile/profile-page";
+import ProfileFormPage from "../../pages/profile-form/profile-form-page";
+import OrdersPage from "../../pages/orders/orders-page";
+import OrderPage from "../../pages/order/order-page";
+import IngredientPage from "../../pages/ingredient/ingredient-page";
 import styles from "./styles.module.css";
-import NotFoundPage from "../../pages/not-found-page";
+import NotFoundPage from "../../pages/not-found/not-found-page";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getUser,
@@ -29,7 +29,7 @@ function App() {
     if (localStorage.getItem("accessToken")) {
       dispatch(getUser());
     }
-  }, []);
+  }, [dispatch]);
 
   if (
     (status === "loading" || status === "idle") &&
