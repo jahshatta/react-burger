@@ -4,12 +4,12 @@ import {
   useParams,
   Navigate,
 } from "react-router-dom";
-import Modal from "../components/modal/modal";
-import IngredientInfo from "../components/burger-ingredients/ingredient-info/ingredient-info";
+import Modal from "../../components/modal/modal";
+import IngredientInfo from "../../components/burger-ingredients/ingredient-info/ingredient-info";
 import {
   fetchIngredients,
   setCurrentIngredient,
-} from "../services/store/indgredients/IngredientsSlice";
+} from "../../services/store/indgredients/IngredientsSlice";
 import { useDispatch } from "react-redux";
 
 function IngredientPage() {
