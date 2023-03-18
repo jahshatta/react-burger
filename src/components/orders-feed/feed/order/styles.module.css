@@ -1,0 +1,9 @@
+.card {
+  background-color: #1c1c21;
+  border-radius: 40px;
+  cursor: pointer;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}

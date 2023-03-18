@@ -5,7 +5,9 @@ import { ReactElement } from "react";
 import { useAppSelector } from "../../../hooks/store";
 
 function IngredientInfo(): ReactElement {
-  const ingredient: IIngredient = useAppSelector(selectCurrentIngredient);
+  const ingredient: IIngredient | undefined = useAppSelector(
+    selectCurrentIngredient
+  );
   if (!ingredient) {
     return <></>;
   }

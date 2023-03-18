@@ -11,7 +11,7 @@ import ForgotPasswordPage from "../../pages/forgot-password/forgot-password-page
 import ResetPasswordPage from "../../pages/reset-password/reset-password-page";
 import ProfilePage from "../../pages/profile/profile-page";
 import ProfileFormPage from "../../pages/profile-form/profile-form-page";
-import OrdersPage from "../../pages/orders/orders-page";
+import UserOrdersPage from "../../pages/user-orders/user-orders-page";
 import OrderPage from "../../pages/order/order-page";
 import IngredientPage from "../../pages/ingredient/ingredient-page";
 import styles from "./styles.module.css";
@@ -21,6 +21,7 @@ import {
   selectgetUserStatus,
 } from "../../services/store/user/UserSlice";
 import { useAppSelector, useAppDispatch } from "../../hooks/store";
+import FeedPage from "../../pages/feed/FeedPage";
 
 function App(): ReactElement {
   const dispatch = useAppDispatch();
@@ -65,10 +66,15 @@ function App(): ReactElement {
             element={<ProtectedRouteElement element={<ProfilePage />} />}
           >
             <Route index path="" element={<ProfileFormPage />} />
-            <Route path="orders" element={<OrdersPage />} />
+            <Route path="orders" element={<UserOrdersPage />} />
             <Route path="orders/:id" element={<OrderPage />} />
           </Route>
           <Route path="/ingredients/:id" element={<IngredientPage />} />
+          <Route path="/feed" element={<FeedPage />} />
+          <Route
+            path="/feed/:id"
+            element={<ProtectedRouteElement element={<OrderPage />} />}
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

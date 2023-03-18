@@ -1,0 +1,48 @@
+.wrapper {
+  display: flex;
+}
+.list {
+  display: flex;
+}
+
+.ingredientThumb {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(#131316, #131316) padding-box,
+    linear-gradient(to bottom, #801ab2, #4c4cff) border-box;
+  border-radius: 50em;
+  border: 2px solid transparent;
+}
+.ingredientThumb:hover {
+  z-index: 999;
+}
+.ingredientThumb img {
+  position: absolute;
+  left: -50%;
+  height: 100%;
+}
+.ingredientThumb:not(:first-child) {
+  margin-left: -16px;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.countMask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 28, 33, 0.6);
+  cursor: initial;
+}

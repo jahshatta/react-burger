@@ -1,0 +1,14 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 60px;
+  /* grid-template-areas: "list" "stats"; */
+  max-height: calc(100vh - 88px);
+  width: 100%;
+}
+
+.section {
+  display: grid;
+  max-height: calc(100vh - 88px);
+  grid-template-rows: min-content minmax(0, 1fr);
+}
