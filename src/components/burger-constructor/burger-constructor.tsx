@@ -96,7 +96,7 @@ function BurgerConstructor() {
               currentUser ? undefined : "Авторизуйтесь чтобы оформить заказ"
             }
             onClick={() => {
-              dispatch(createOrder([...buns, ...ingredients]));
+              dispatch(createOrder([buns[0], ...ingredients, buns[1]]));
               setModalIsVisible(true);
               dispatch(resetConstructor());
             }}

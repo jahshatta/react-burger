@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { IIngredient } from "./../../../ts/interfaces/ingredient.interface";
 import { createOrderRequest } from "../../api/order";
 import { TOrder } from "../../api/order";
-
 interface IOrderState {
   lastOrder: TOrder | {};
   status: "idle" | "loading" | "succeeded" | "failed";

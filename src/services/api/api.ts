@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { setCookie } from "../utils";
+import { setCookie, getCookie } from "../utils";
 
 const BASE_URL = "https://norma.nomoreparties.space/api";
 
@@ -9,9 +9,10 @@ const api: AxiosInstance = axios.create({
 });
 
 api.interceptors.request.use(function (config: AxiosRequestConfig) {
-  config.headers.authorization = `Bearer ${localStorage.getItem(
-    "accessToken"
-  )}`;
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) {
+    config.headers.authorization = `Bearer ${accessToken}`;
+  }
   return config;
 });
 
@@ -22,12 +23,12 @@ api.interceptors.response.use(
     if (status === 403) {
       try {
         const response = await axios.post(`${BASE_URL}/auth/token`, {
-          token: localStorage.getItem("refreshToken"),
+          token: getCookie("refreshToken"),
         });
         const { success, accessToken, refreshToken } = response.data;
 
         if (success) {
-          localStorage.setItem("accessToken", accessToken);
+          localStorage.setItem("accessToken", accessToken.split("Bearer ")[1]);
           setCookie("refreshToken", refreshToken);
         }
         return api(error.config);

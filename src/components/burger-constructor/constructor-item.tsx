@@ -40,7 +40,6 @@ function ConstructorItem({ data, type, index, ...props }: Iprops) {
       };
     },
     hover(item: any, monitor) {
-      console.log("item", item);
       if (!ref.current) {
         return;
       }
