@@ -21,7 +21,7 @@ function IngredientPage(): ReactElement {
   if (state?.showModal) {
     return (
       <Modal
-        title="Детали ингредиента"
+        title={<p className="text text_type_main-large">Детали ингредиента</p>}
         onClose={() => {
           navigate(-1);
         }}

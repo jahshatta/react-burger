@@ -1,0 +1,33 @@
+.section {
+  display: grid;
+  max-height: calc(100vh - 88px);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-gap: 60px;
+}
+
+.queue {
+  display: flex;
+  gap: 36px;
+}
+
+.done,
+.pending {
+  flex-grow: 1;
+  flex-basis: 0;
+  display: grid;
+  grid-template-rows: max-content 1fr;
+}
+
+.numbersList {
+  overflow-y: auto;
+  columns: 2;
+}
+
+.numberDone {
+  color: #00cccc;
+}
+
+.glow {
+  text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25),
+    0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+}

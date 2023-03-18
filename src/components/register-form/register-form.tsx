@@ -49,7 +49,6 @@ function RegisterForm(): ReactElement {
       email: e.currentTarget.elements.email.value,
       password: e.currentTarget.elements.password.value,
     };
-    console.log("REGISTER", params);
     dispatch(register(params));
   };
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>): void => {

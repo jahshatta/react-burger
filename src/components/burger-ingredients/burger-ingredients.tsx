@@ -30,7 +30,7 @@ type TOvserverRefsMap = {
 
 function BurgerIngredients() {
   const [current, setCurrent] = useState<string>("bun");
-  const ingredients: IIngredient[] = useAppSelector(selectAllIngredients);
+  const ingredients = useAppSelector(selectAllIngredients);
   const [bunsRef, bunsView] = useInView();
   const [saucesRef, saucesView] = useInView();
   const [mainRef, mainView] = useInView();

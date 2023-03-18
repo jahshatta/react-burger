@@ -1,0 +1,7 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 40px;
+  grid-template-areas: "list" "constructor";
+  max-height: calc(100vh - 88px);
+}

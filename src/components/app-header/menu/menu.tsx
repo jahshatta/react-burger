@@ -14,7 +14,7 @@ function Menu(): ReactElement {
     <nav className={styles.nav}>
       <ul className={styles.list}>
         <MenuItem Icon={BurgerIcon} text="Конструктор" path="/" />
-        <MenuItem Icon={ListIcon} path="/profile/orders" text="Лента заказов" />
+        <MenuItem Icon={ListIcon} path="/feed" text="Лента заказов" />
       </ul>
       <div className={styles.wrapper}>
         <Link to="/">

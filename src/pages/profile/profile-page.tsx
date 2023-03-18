@@ -5,7 +5,7 @@ import { ReactElement } from "react";
 
 function ProfilePage(): ReactElement {
   return (
-    <div className={`${styles.container} mt-30`}>
+    <div className={`${styles.container} pt-30`}>
       <ProfileMenu />
       <Outlet />
     </div>
