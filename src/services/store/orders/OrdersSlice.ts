@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { IIngredient } from "./../../../ts/interfaces/ingredient.interface";
 import { createOrderRequest } from "../../api/order";
 import { TOrder } from "../../api/order";
+
 interface IOrderState {
   lastOrder: TOrder | {};
   status: "idle" | "loading" | "succeeded" | "failed";
@@ -26,11 +27,7 @@ export const createOrder = createAsyncThunk(
 export const ordersSlice = createSlice({
   name: "orders",
   initialState,
-  reducers: {
-    setLastOrder: (state, action) => {
-      state.lastOrder = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(createOrder.pending, (state) => {
@@ -42,7 +39,7 @@ export const ordersSlice = createSlice({
       })
       .addCase(createOrder.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message || "";
+        state.error = action.error.message || "Что-то пошло не так";
       });
   },
 });

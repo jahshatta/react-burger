@@ -2,6 +2,15 @@
   "name": "react-burger",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(axios)/)"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts"
+    ]
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.16.5",
@@ -31,7 +40,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "./node_modules/.bin/cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +62,11 @@
     ]
   },
   "devDependencies": {
-    "@types/uuid4": "^2.0.0"
+    "@types/axios": "^0.14.0",
+    "@types/uuid4": "^2.0.0",
+    "axios-mock-adapter": "^1.21.2",
+    "cypress": "^12.8.1",
+    "fetch-mock": "^9.11.0",
+    "redux-mock-store": "^1.5.4"
   }
 }

@@ -3,7 +3,6 @@ import { WebsocketStatus } from "../../../../ts/interfaces/types/orders-ws";
 import { createReducer } from "@reduxjs/toolkit";
 import { wsOpen, wsClose, wsMessage, wsError, wsConnecting } from "./actions";
 
-// TODO: Объединить с типом OrdersWsStore?
 export type UserOrdersWsStore = {
   status: WebsocketStatus;
   connectionError: string;
@@ -35,7 +34,7 @@ export const userOrdersWsReducer = createReducer(initialState, (builder) => {
       state.status = WebsocketStatus.OFFLINE;
     })
     .addCase(wsError, (state, action) => {
-      state.connectionError = action.payload;
+      state.connectionError = action.payload || "error";
     })
     .addCase(wsMessage, (state, action) => {
       state.orders = action.payload.orders;
