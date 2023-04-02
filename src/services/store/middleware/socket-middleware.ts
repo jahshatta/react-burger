@@ -50,6 +50,7 @@ export const createSocketMiddleware = (
 
         socket.onerror = (err) => {
           console.log("error");
+          dispatch(onError(err.toString()));
         };
 
         socket.onmessage = (event) => {

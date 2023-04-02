@@ -20,6 +20,7 @@ import styles from "./styles.module.css";
 import { IIngredient } from "../../ts/interfaces/ingredient.interface";
 import { useAppSelector, useAppDispatch } from "../../hooks/store";
 import { createOrder } from "../../services/store/orders/OrdersSlice";
+import uuid4 from "uuid4";
 
 function BurgerConstructor() {
   const dispatch = useAppDispatch();
@@ -37,6 +38,10 @@ function BurgerConstructor() {
   const [, dropRef] = useDrop({
     accept: "ingredient",
     drop(item: IIngredient) {
+      const object = {
+        ...item,
+        uuid: uuid4(),
+      };
       if (item.type !== "bun") {
         dispatch(addIngredient(item));
       } else {

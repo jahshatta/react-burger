@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import { setCookie, getCookie } from "../utils";
 
-const BASE_URL = "https://norma.nomoreparties.space/api";
+export const BASE_URL = "https://norma.nomoreparties.space/api";
 
 const api: AxiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -18,7 +18,8 @@ api.interceptors.request.use(function (config: AxiosRequestConfig) {
 
 api.interceptors.response.use(
   (response: AxiosResponse) => response,
-  async (error) => {
+  async (error: any) => {
+    console.log("error.response", error);
     const { status } = error.response;
     if (status === 403) {
       try {

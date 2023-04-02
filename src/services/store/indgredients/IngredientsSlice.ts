@@ -1,6 +1,5 @@
 import { RootState } from "./../store";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import uuid4 from "uuid4";
 import { IIngredient } from "../../../ts/interfaces/ingredient.interface";
 import { fetchIngredientsRequest } from "../../api/ingredients";
 
@@ -37,13 +36,9 @@ export const ingredientsSlice = createSlice({
   name: "ingredients",
   initialState,
   reducers: {
-    setIngredients: (state, action) => {
-      state.ingredients = action.payload;
-    },
     addIngredient: (state, action) => {
       const ingredient: IngredientWithUUID = {
         ...action.payload,
-        uuid: uuid4(),
       };
       state.selectedIngredients.push(ingredient);
 
@@ -68,12 +63,10 @@ export const ingredientsSlice = createSlice({
       state.selectedBuns = [
         {
           ...bun,
-          uuid: uuid4(),
           name: `${bun.name} (верх)`,
         },
         {
           ...bun,
-          uuid: uuid4(),
           name: `${bun.name} (низ)`,
         },
       ];
@@ -115,14 +108,13 @@ export const ingredientsSlice = createSlice({
       })
       .addCase(fetchIngredients.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message || "";
+        state.error = action.error.message || "Что-то пошло не так";
       });
   },
 });
 
 export const {
   addBun,
-  setIngredients,
   addIngredient,
   removeIngredient,
   resetConstructor,
