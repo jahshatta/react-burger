@@ -31,7 +31,7 @@ function Ingredient({ data }: IProps): ReactElement {
   }));
 
   return (
-    <div className={styles.cardWrapper}>
+    <div className={`${styles.cardWrapper} ingredient`}>
       {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
       <div
         ref={dragRef}

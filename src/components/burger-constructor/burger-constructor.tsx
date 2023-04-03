@@ -52,7 +52,7 @@ function BurgerConstructor() {
   return (
     <>
       <section className={`${styles.constructor} pt-25 pb-5`}>
-        <section className={`${styles.list}`} ref={dropRef}>
+        <section className={`${styles.list} drop-area`} ref={dropRef}>
           <>
             <div className="pl-8">
               {topBun ? (

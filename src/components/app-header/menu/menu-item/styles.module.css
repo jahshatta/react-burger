@@ -1,3 +1,6 @@
+.item {
+  display: flex;
+}
 .item:first-child {
   margin-right: 8px;
 }
