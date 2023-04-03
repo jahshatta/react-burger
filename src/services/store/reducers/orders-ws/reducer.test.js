@@ -1,16 +1,7 @@
-import { ordersWsReducer } from "./reducer";
+import { ordersWsReducer, initialState } from "./reducer";
 import { WsOrdersResponse } from "../../../../utils/test.data";
 
 describe("ordersWsReducer reducer", () => {
-  const initialState = {
-    status: "OFFLINE",
-    connectionError: "",
-    orders: [],
-    total: null,
-    totalToday: null,
-    loading: true,
-  };
-
   it("should handle initial state", () => {
     expect(ordersWsReducer(undefined, { type: "unknown" })).toEqual(
       initialState

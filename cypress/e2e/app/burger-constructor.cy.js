@@ -6,7 +6,7 @@ describe("burger constructor functional tests", () => {
     cy.intercept("POST", `${BASE_URL}/auth/login`).as("login");
     cy.intercept("GET", `${BASE_URL}/ingredients`).as("getIngredients");
 
-    cy.visit("http://localhost:3000/login");
+    cy.visit("login");
     cy.get("[name^=email]").type("vovek.zverev@gmail.com");
     cy.get("[name^=password]").type("111111");
     cy.get("button").contains("Войти").click();

@@ -12,7 +12,7 @@ export type OrdersWsStore = {
   loading: boolean;
 };
 
-const initialState: OrdersWsStore = {
+export const initialState: OrdersWsStore = {
   status: WebsocketStatus.OFFLINE,
   connectionError: "",
   orders: [],

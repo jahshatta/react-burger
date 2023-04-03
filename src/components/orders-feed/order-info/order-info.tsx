@@ -51,7 +51,9 @@ function OrderInfo({ data }: OrderInfoProps): ReactElement {
       <p className="text text_type_main-medium mb-6">Состав:</p>
       <div className={`${styles.ingredientsList} custom-scroll mb-10 pr-3`}>
         {ingredients.map((item: IIngredient) => {
-          return <Ingredient data={item} count={countMap[item._id]} />;
+          return (
+            <Ingredient data={item} key={item._id} count={countMap[item._id]} />
+          );
         })}
       </div>
       <div className={styles.footer}>

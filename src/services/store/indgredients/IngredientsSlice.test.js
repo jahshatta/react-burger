@@ -1,16 +1,9 @@
-import ingredientReducer, { fetchIngredients } from "./IngredientsSlice";
+import ingredientReducer, {
+  initialState,
+  fetchIngredients,
+} from "./IngredientsSlice";
 
 describe("ingredients reducer", () => {
-  const initialState = {
-    ingredients: [],
-    status: "idle",
-    error: "",
-    selectedBuns: [],
-    selectedIngredients: [],
-    countMap: {},
-    currentIngredientId: null,
-  };
-
   it("should handle initial state", () => {
     expect(ingredientReducer(undefined, { type: "unknown" })).toEqual(
       initialState

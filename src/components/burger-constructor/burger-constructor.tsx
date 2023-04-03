@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDrop } from "react-dnd";
 import {
   Button,
@@ -27,6 +28,7 @@ function BurgerConstructor() {
   const buns = useAppSelector(selectAllBuns);
   const ingredients = useAppSelector(selectSelectedIngredients);
   const currentUser = useAppSelector(selectCurrentUser);
+  const navigate = useNavigate();
   const [topBun, bottomBun] = buns;
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const totalPrice = useMemo<number>(() => {
@@ -43,9 +45,9 @@ function BurgerConstructor() {
         uuid: uuid4(),
       };
       if (item.type !== "bun") {
-        dispatch(addIngredient(item));
+        dispatch(addIngredient(object));
       } else {
-        dispatch(addBun(item));
+        dispatch(addBun(object));
       }
     },
   });
@@ -94,13 +96,16 @@ function BurgerConstructor() {
           </div>
           <Button
             htmlType="button"
-            disabled={!(buns.length && ingredients.length) || !currentUser}
             type="primary"
             size="large"
             title={
               currentUser ? undefined : "Авторизуйтесь чтобы оформить заказ"
             }
             onClick={() => {
+              if (!currentUser) {
+                navigate("/login");
+                return;
+              }
               dispatch(createOrder([buns[0], ...ingredients, buns[1]]));
               setModalIsVisible(true);
               dispatch(resetConstructor());

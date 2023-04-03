@@ -71,10 +71,7 @@ function App(): ReactElement {
           </Route>
           <Route path="/ingredients/:id" element={<IngredientPage />} />
           <Route path="/feed" element={<FeedPage />} />
-          <Route
-            path="/feed/:id"
-            element={<ProtectedRouteElement element={<OrderPage />} />}
-          />
+          <Route path="/feed/:id" element={<OrderPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

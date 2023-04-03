@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import MockAdapter from "axios-mock-adapter";
 import api from "../../api/api";
 import ordersReducer, {
+  initialState,
   createOrder,
   selectLastOrderNumber,
 } from "./OrdersSlice";
@@ -15,12 +16,6 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe("orders reducer", () => {
-  const initialState = {
-    lastOrder: {},
-    status: "idle",
-    error: "",
-  };
-
   it("should return initial state", () => {
     expect(ordersReducer(undefined, { type: "unknown" })).toEqual(initialState);
   });
