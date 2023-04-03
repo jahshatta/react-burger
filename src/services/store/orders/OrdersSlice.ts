@@ -9,7 +9,7 @@ interface IOrderState {
   error: string;
 }
 
-const initialState: IOrderState = {
+export const initialState: IOrderState = {
   lastOrder: {},
   status: "idle",
   error: "",

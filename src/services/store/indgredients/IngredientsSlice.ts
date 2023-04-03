@@ -13,7 +13,7 @@ interface IIngredientsState {
   currentIngredientId: string | null;
 }
 
-const initialState: IIngredientsState = {
+export const initialState: IIngredientsState = {
   ingredients: [],
   status: "idle",
   error: "",

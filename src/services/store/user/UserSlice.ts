@@ -28,7 +28,7 @@ interface IUserState {
   getUser: TState;
 }
 
-const initialState: IUserState = {
+export const initialState: IUserState = {
   user: null,
   token: null,
   updateUser: {

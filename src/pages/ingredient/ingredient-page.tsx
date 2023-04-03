@@ -1,9 +1,4 @@
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  Navigate,
-} from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Modal from "../../components/modal/modal";
 import IngredientInfo from "../../components/burger-ingredients/ingredient-info/ingredient-info";
 import {
@@ -14,10 +9,13 @@ import { ReactElement } from "react";
 import { useAppDispatch } from "../../hooks/store";
 
 function IngredientPage(): ReactElement {
-  const { state } = useLocation();
+  const location = useLocation();
+  const { state } = location;
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  dispatch(fetchIngredients());
+  dispatch(setCurrentIngredient(id));
   if (state?.showModal) {
     return (
       <Modal
@@ -31,16 +29,11 @@ function IngredientPage(): ReactElement {
     );
   }
 
-  if (id) {
-    dispatch(fetchIngredients());
-    dispatch(setCurrentIngredient(id));
-    return (
-      <div>
-        <IngredientInfo />
-      </div>
-    );
-  }
-  return <Navigate to="/" replace />;
+  return (
+    <div>
+      <IngredientInfo />
+    </div>
+  );
 }
 
 export default IngredientPage;

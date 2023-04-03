@@ -1,4 +1,4 @@
-import userReducer from "./UserSlice";
+import userReducer, { initialState } from "./UserSlice";
 import {
   register,
   login,
@@ -10,39 +10,6 @@ import {
 } from "./UserSlice";
 
 describe("user reducer", () => {
-  const initialState = {
-    user: null,
-    token: null,
-    updateUser: {
-      status: "idle",
-      error: "",
-    },
-    register: {
-      status: "idle",
-      error: "",
-    },
-    login: {
-      status: "idle",
-      error: "",
-    },
-    logout: {
-      status: "idle",
-      error: "",
-    },
-    resetPassword: {
-      status: "idle",
-      error: "",
-    },
-    confirmResetPassword: {
-      status: "idle",
-      error: "",
-    },
-    getUser: {
-      status: "idle",
-      error: "",
-    },
-  };
-
   it("should handle initial state", () => {
     expect(userReducer(undefined, { type: "unknown" })).toEqual(initialState);
   });
